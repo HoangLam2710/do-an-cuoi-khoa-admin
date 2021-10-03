@@ -1,6 +1,7 @@
 import { createAction } from "./index";
 import { actionTypes } from "./types";
 import { request } from "../../API/request";
+import { toast } from "react-toastify";
 
 export const fetchUserList = (currentPage, tuKhoa) => (dispatch) => {
     request({
@@ -29,8 +30,15 @@ export const addUser = (user, callback) => () => {
             callback();
         })
         .catch((err) => {
-            alert(err.response.data.content);
-            console.log(err);
+            toast.warn(err.response.data.content, {
+                position: "top-right",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
         });
 };
 
@@ -44,8 +52,15 @@ export const editUser = (user, callback) => () => {
             callback();
         })
         .catch((err) => {
-            alert(err.response.data.content);
-            console.log(err);
+            toast.warn(err.response.data.content, {
+                position: "top-right",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
         });
 };
 
@@ -61,7 +76,14 @@ export const deleteUserApi = (user, callback) => () => {
             callback();
         })
         .catch((err) => {
-            alert(err.response.data.content);
-            console.log(err);
+            toast.warn(err.response.data.content, {
+                position: "top-right",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
         });
 };

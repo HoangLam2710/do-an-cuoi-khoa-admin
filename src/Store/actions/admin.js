@@ -1,6 +1,7 @@
 import { createAction } from "./index";
 import { actionTypes } from "./types";
 import { request } from "../../API/request";
+import { toast } from "react-toastify";
 
 export const signIn = (account, cb) => (dispatch) => {
     request({
@@ -15,12 +16,27 @@ export const signIn = (account, cb) => (dispatch) => {
                 localStorage.setItem("taiKhoan", res.data.content.taiKhoan);
                 cb();
             } else {
-                alert("Tài khoản không được quyền truy cập!!!");
+                toast.warn("Tài khoản không được quyền truy cập!!!", {
+                    position: "top-right",
+                    autoClose: 3000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                });
             }
         })
         .catch((err) => {
-            alert("Tài khoản hoặc mật khẩu nhập sai!!!");
-            console.log(err);
+            toast.warn("Tài khoản hoặc mật khẩu nhập sai!!!", {
+                position: "top-right",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
         });
 };
 

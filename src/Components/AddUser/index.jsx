@@ -1,5 +1,6 @@
-import React, { useCallback } from "react";
+import React, { useCallback, memo } from "react";
 import { useDispatch } from "react-redux";
+
 import {
     Typography,
     TextField,
@@ -17,12 +18,17 @@ import {
     PhoneIphone,
     Person,
 } from "@material-ui/icons";
+
 import { useFormik } from "formik";
 import * as yup from "yup";
+import { toast } from "react-toastify";
+
 import { addUser } from "../../Store/actions/user";
 import { actionTypes } from "../../Store/actions/types";
 import { createAction } from "../../Store/actions";
+
 import useStyle from "./style";
+import "../../../node_modules/react-toastify/dist/ReactToastify.css";
 
 const validationSchema = yup.object().shape({
     taiKhoan: yup.string().required("Không được bỏ trống!"),
@@ -63,7 +69,15 @@ const AddUser = () => {
     }, [formik]);
 
     const goToHome = useCallback(() => {
-        alert("Thêm thành công!!!");
+        toast.success("Thêm thành công!!!", {
+            position: "top-right",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+        });
         // thêm thành công thì tắt popup
         dispatch(createAction(actionTypes.SET_OPEN, false));
         dispatch(createAction(actionTypes.SET_PAGE, 1));
@@ -236,4 +250,4 @@ const AddUser = () => {
     );
 };
 
-export default AddUser;
+export default memo(AddUser);

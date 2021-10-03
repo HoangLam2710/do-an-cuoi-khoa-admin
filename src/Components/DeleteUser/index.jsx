@@ -1,9 +1,14 @@
-import React, { useCallback } from "react";
+import React, { useCallback, memo } from "react";
 import { useDispatch, useSelector } from "react-redux";
+
 import { Typography, Button } from "@material-ui/core";
+
 import { fetchUserList, deleteUserApi } from "../../Store/actions/user";
 import { actionTypes } from "../../Store/actions/types";
 import { createAction } from "../../Store/actions";
+
+import { toast } from "react-toastify";
+
 import useStyle from "./style";
 
 const DeleteUser = () => {
@@ -23,7 +28,15 @@ const DeleteUser = () => {
     }, [dispatch]);
 
     const alertDelete = useCallback(() => {
-        alert("Xoá thành công!!!");
+        toast.success("Xoá thành công!!!", {
+            position: "top-right",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+        });
         dispatch(createAction(actionTypes.SET_OPEN, false));
         dispatch(fetchUserList(page));
     }, [dispatch, page]);
@@ -59,4 +72,4 @@ const DeleteUser = () => {
     );
 };
 
-export default DeleteUser;
+export default memo(DeleteUser);

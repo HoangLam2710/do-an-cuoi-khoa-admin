@@ -3,20 +3,27 @@ import Home from "./Views/Home";
 import User from "./Views/User";
 import Movie from "./Views/Movie";
 import PageNotFound from "./Views/PageNotFound";
-import Layout from "./HOC/Layout";
 import { ThemeProvider } from "@material-ui/core";
 import theme from "./Theme";
+import { AuthRoute, PrivateRoute } from "./HOC/Route";
 
 const App = () => {
     return (
         <BrowserRouter>
             <ThemeProvider theme={theme}>
                 <Switch>
-                    <Route path="/" exact component={Home} />
-                    <Layout path="/">
-                        <Route path="/user" component={User} />
-                        <Route path="/movie" component={Movie} />
-                    </Layout>
+                    <PrivateRoute
+                        path="/"
+                        exact
+                        Component={Home}
+                        redirectPath="/user"
+                    />
+                    <AuthRoute path="/user" Component={User} redirectPath="/" />
+                    <AuthRoute
+                        path="/movie"
+                        Component={Movie}
+                        redirectPath="/"
+                    />
                     <Route path="*" component={PageNotFound} />
                 </Switch>
             </ThemeProvider>
