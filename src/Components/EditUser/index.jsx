@@ -1,5 +1,6 @@
-import React, { useCallback } from "react";
+import React, { useCallback, memo } from "react";
 import { useDispatch, useSelector } from "react-redux";
+
 import {
     Typography,
     TextField,
@@ -17,15 +18,19 @@ import {
     PhoneIphone,
     Person,
 } from "@material-ui/icons";
+
 import { useFormik } from "formik";
 import * as yup from "yup";
+import { toast } from "react-toastify";
+
 import { editUser, fetchUserList } from "../../Store/actions/user";
 import { actionTypes } from "../../Store/actions/types";
 import { createAction } from "../../Store/actions";
+
 import useStyle from "./style";
+import "../../../node_modules/react-toastify/dist/ReactToastify.css";
 
 const validationSchema = yup.object().shape({
-    taiKhoan: yup.string().required("Không được bỏ trống!"),
     matKhau: yup.string().required("Không được bỏ trống!"),
     hoTen: yup.string().required("Không được bỏ trống!"),
     email: yup
@@ -71,7 +76,15 @@ const EditUser = () => {
     }, [formik]);
 
     const goToHome = useCallback(() => {
-        alert("Cập nhật thành công!!!");
+        toast.success("Cập nhật thành công!!!", {
+            position: "top-right",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+        });
         // thêm thành công thì tắt popup
         dispatch(createAction(actionTypes.SET_OPEN, false));
         dispatch(fetchUserList(page));
@@ -109,11 +122,6 @@ const EditUser = () => {
                         }}
                         disabled
                     />
-                    {formik.touched.taiKhoan && (
-                        <Typography color="error" variant={"subtitle2"}>
-                            {formik.errors.taiKhoan}
-                        </Typography>
-                    )}
                 </div>
                 <div className={classes.margin}>
                     <TextField
@@ -242,4 +250,4 @@ const EditUser = () => {
     );
 };
 
-export default EditUser;
+export default memo(EditUser);
