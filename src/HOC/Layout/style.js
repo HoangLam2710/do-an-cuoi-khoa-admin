@@ -5,7 +5,7 @@ const useStyle = makeStyles((theme) => {
         mainContent: {
             marginLeft: 300,
             "&.toggle": {
-                marginLeft: 70,
+                marginLeft: 100,
                 [theme.breakpoints.down("sm")]: {
                     marginLeft: 0,
                 },

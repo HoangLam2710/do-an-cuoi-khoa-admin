@@ -5,7 +5,6 @@ const useStyle = makeStyles((theme) => {
         sidebar: {
             width: 300,
             [theme.breakpoints.down("sm")]: {
-                width: 300,
                 opacity: 1,
                 visibility: "visible",
                 transition: "all .3s",
@@ -21,18 +20,76 @@ const useStyle = makeStyles((theme) => {
                 "& li": {
                     padding: 0,
                     paddingLeft: "2rem",
-                    marginBottom: "1.2rem",
                     "& a": {
                         width: "100%",
-                        borderRadius: 0,
                         display: "flex",
                         textDecoration: "none",
                         padding: ".5rem",
-                        transition: "all .2s",
+                        borderRadius: "30px 0 0 30px",
+                        position: "relative",
+                        "&:hover": {
+                            background: theme.palette.primary.contrastText,
+                            color: theme.palette.primary.dark,
+                            "&::before": {
+                                content: `""`,
+                                position: "absolute",
+                                right: 0,
+                                top: -50,
+                                width: 50,
+                                height: 50,
+                                background: "transparent",
+                                borderRadius: "50%",
+                                boxShadow: "35px 35px 0 10px white",
+                                pointerEvents: "none",
+                            },
+                            "&::after": {
+                                content: `""`,
+                                position: "absolute",
+                                right: 0,
+                                bottom: -50,
+                                width: 50,
+                                height: 50,
+                                background: "transparent",
+                                borderRadius: "50%",
+                                boxShadow: "35px -35px 0 10px white",
+                                pointerEvents: "none",
+                            },
+                            "& .MuiListItemIcon-root": {
+                                color: theme.palette.primary.dark,
+                            },
+                            "& .MuiListItemText-root": {
+                                "& .MuiTypography-body1": {
+                                    color: theme.palette.primary.dark,
+                                },
+                            },
+                        },
                         "&.active": {
                             background: theme.palette.primary.contrastText,
                             color: theme.palette.primary.dark,
-                            borderRadius: "30px 0 0 30px",
+                            "&::before": {
+                                content: `""`,
+                                position: "absolute",
+                                right: 0,
+                                top: -50,
+                                width: 50,
+                                height: 50,
+                                background: "transparent",
+                                borderRadius: "50%",
+                                boxShadow: "35px 35px 0 10px white",
+                                pointerEvents: "none",
+                            },
+                            "&::after": {
+                                content: `""`,
+                                position: "absolute",
+                                right: 0,
+                                bottom: -50,
+                                width: 50,
+                                height: 50,
+                                background: "transparent",
+                                borderRadius: "50%",
+                                boxShadow: "35px -35px 0 10px white",
+                                pointerEvents: "none",
+                            },
                             "& .MuiListItemIcon-root": {
                                 color: theme.palette.primary.dark,
                             },
@@ -56,7 +113,7 @@ const useStyle = makeStyles((theme) => {
                 },
             },
             "&.toggle": {
-                width: 70,
+                width: 100,
                 [theme.breakpoints.down("sm")]: {
                     width: 0,
                     opacity: 0,
