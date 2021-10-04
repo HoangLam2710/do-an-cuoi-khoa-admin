@@ -14,6 +14,10 @@ export const signIn = (account, cb) => (dispatch) => {
                 dispatch(createAction(actionTypes.SET_ADMIN, res.data.content));
                 localStorage.setItem("t", res.data.content.accessToken);
                 localStorage.setItem("taiKhoan", res.data.content.taiKhoan);
+                // clear localStorage after one hour
+                setTimeout(function () {
+                    localStorage.clear();
+                }, 1000 * 60 * 60);
                 cb();
             } else {
                 toast.warn("Tài khoản không được quyền truy cập!!!", {
@@ -28,7 +32,7 @@ export const signIn = (account, cb) => (dispatch) => {
             }
         })
         .catch((err) => {
-            toast.warn("Tài khoản hoặc mật khẩu nhập sai!!!", {
+            toast.warn(err.response.data.content, {
                 position: "top-right",
                 autoClose: 3000,
                 hideProgressBar: false,
