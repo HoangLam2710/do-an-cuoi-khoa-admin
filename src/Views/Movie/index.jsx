@@ -39,6 +39,8 @@ const Movie = () => {
     const classes = useStyles();
     const dispatch = useDispatch();
 
+    window.scroll({ top: 0, behavior: "smooth" });
+
     const formik = useFormik({
         initialValues: {
             tenPhim: "",
@@ -50,6 +52,7 @@ const Movie = () => {
         dispatch(createAction(actionTypes.SET_SIDEBAR_PAGE, true));
         if (formik.values.tenPhim === "") {
             dispatch(fetchMovies(1));
+            dispatch(createAction(actionTypes.SET_PAGE_MOVIE, 1));
         }
     }, [dispatch, formik.values.tenPhim]);
 
@@ -258,7 +261,8 @@ const Movie = () => {
                     count={movieList?.totalPages}
                     onChange={hanldChangePage}
                     className={classes.pagination}
-                    defaultPage={page}
+                    page={page}
+                    defaultPage={1}
                 />
             </Container>
         </Layout>
