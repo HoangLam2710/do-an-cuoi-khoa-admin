@@ -38,6 +38,8 @@ const User = () => {
     const classes = useStyles();
     const dispatch = useDispatch();
 
+    window.scroll({ top: 0, behavior: "smooth" });
+
     const formik = useFormik({
         initialValues: {
             tuKhoa: "",
@@ -260,7 +262,8 @@ const User = () => {
                     count={userList?.totalPages}
                     onChange={hanldChangePage}
                     className={classes.pagination}
-                    defaultPage={page}
+                    page={page}
+                    defaultPage={1}
                 />
             </Container>
         </Layout>
