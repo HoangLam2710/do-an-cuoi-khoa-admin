@@ -161,7 +161,6 @@ const EditMovie = () => {
                         value={formik.values.tenPhim}
                         onBlur={formik.handleBlur}
                         onChange={formik.handleChange}
-                        disabled
                     />
                     {formik.touched.tenPhim && (
                         <Typography color="error" variant={"subtitle2"}>
