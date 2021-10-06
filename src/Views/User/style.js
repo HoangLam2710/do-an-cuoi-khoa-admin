@@ -4,6 +4,7 @@ const useStyles = makeStyles((theme) => {
     return {
         container: {
             margin: "40px auto",
+            position: "relative",
         },
         table: {
             minWidth: 650,
